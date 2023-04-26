@@ -1,8 +1,16 @@
-import React from "react";
+import React, {ChangeEvent, HtmlHTMLAttributes, useState} from "react";
+import {useDispatch, useSelector} from 'react-redux'; 
 import styled from "styled-components";
+import { selectTodos, selectTodoReducer } from "../../Store/Todo/Todo.selector";
+import { addTodo } from "../../Store/Todo/Todo.action";
 
+export type Todo = {
+    title: string;
+    description: string;
+    dateCreated?: Date; 
+}; 
 
-const InputContainer = styled.form `
+const InputContainer = styled.div `
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -46,15 +54,35 @@ const AddTodoButton = styled.button `
         background-color: #91efe6;
     }
 `
+const defaultTodoValue: Todo = {
+    title: '',
+    description: '', 
+}; 
 
+const Input = () => {
+    const dispatch = useDispatch(); 
 
-const Input: React.FC = () => {
+    const [toDo, setTodo] = useState<Todo>(defaultTodoValue); 
 
+    const currentTodos = useSelector(selectTodoReducer); 
+  
+    const addNewTodo = () => dispatch(addTodo(currentTodos.currentTodos, toDo))
+
+    const handleChange = (e: ChangeEvent <HTMLTextAreaElement | HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setTodo({ ...toDo, [name]: value });
+      };
+
+    const onSubmit = (e: React.FormEvent) => {
+        e.preventDefault(); 
+        console.log(toDo)
+    }
+console.log('currentTodos', currentTodos)
     return (
      <InputContainer>
-<TodoInput type='text' placeholder='Todo Title...' />
-<TodoDescription placeholder="Todo Description..." /> 
-<AddTodoButton type="submit">Create</AddTodoButton>
+<TodoInput onChange={handleChange} name='title' type='text' placeholder='Todo Title...' />
+<TodoDescription onChange={handleChange} name="description" placeholder="Todo Description..." /> 
+<AddTodoButton onClick={addNewTodo} type="submit">Create</AddTodoButton>
 
      </InputContainer>
     ); 
