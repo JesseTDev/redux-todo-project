@@ -1,4 +1,4 @@
-import { Todo } from "../../Components/Input-Todos/input.component";
+import { Todo } from "../../Components/Todos/components/createTodo.component";
 import { TODO_ACTION_TYPES } from "./Todo.Types";
 
 export type InitialState = {

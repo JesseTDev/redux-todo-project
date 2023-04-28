@@ -1,9 +1,9 @@
-import React, { ChangeEvent, HtmlHTMLAttributes, useState } from "react";
-import { useDispatch, useSelector, useStore } from "react-redux";
+import React, { ChangeEvent, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { selectTodos, selectTodoReducer } from "../../Store/Todo/Todo.selector";
-import { addTodo } from "../../Store/Todo/Todo.action";
-import { InitialState } from "../../Store/Todo/Todo.reducer";
+import { addTodo } from "../../../Store/Todo/Todo.action";
+import CustomButton from "../../shared-components/button.component";
+
 
 export type Todo = {
   title: string;
@@ -38,22 +38,13 @@ const TodoDescription = styled.textarea`
   }
 `;
 
-const AddTodoButton = styled.button`
-  cursor: pointer;
-  border-radius: 10px;
-  font-size: 20px;
-  border: none;
-  width: 100px;
-  align-self: center;
-  height: 50px;
-  margin-left: 10px;
-  transition: 0.3s ease;
-  margin-top: 10px;
-  background-color: #4ad1c4;
-  &:hover {
-    background-color: #91efe6;
-  }
-`;
+const TextError = styled.p `
+  text-align: center;
+  color: red;
+  padding: 5px;
+`
+
+
 const defaultTodoValue: Todo = {
   title: "",
   description: "",
@@ -63,16 +54,32 @@ const Input = () => {
   const dispatch = useDispatch();
 
   const [toDo, setTodo] = useState<Todo>(defaultTodoValue);
+  const [errorState, setErrorState] = useState<boolean>(false);
 
   const currentState = useSelector((state: any) => state.todos.currentTodos);
 
-  const addNewTodo = () => dispatch(addTodo(currentState, toDo));
+  const addNewTodo = () => {
+
+      const doesTitleExistCheck = currentState.filter((todo: Todo) => todo.title === toDo.title)
+
+
+      if (doesTitleExistCheck.length > 0) {
+        setErrorState(true); 
+        setTimeout(() => {
+          setErrorState(false)
+        }, 3000); 
+
+        return 
+      }
+    dispatch(addTodo(currentState, toDo));
+}; 
+
 
   const handleChange = (
     e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     const { name, value } = e.target;
-    setTodo({ ...toDo, [name]: value });
+    setTodo({ ...toDo, [name]: value, dateCreated: new Date() });
   };
 
   const onSubmit = (e: React.FormEvent) => {
@@ -80,6 +87,7 @@ const Input = () => {
     console.log(toDo);
   };
 
+  console.log('state', currentState)
   return (
     <InputContainer>
       <TodoInput
@@ -88,14 +96,14 @@ const Input = () => {
         type="text"
         placeholder="Todo Title..."
       />
+      {errorState && <TextError>Title Already Exists! Please try another.</TextError>}
       <TodoDescription
         onChange={handleChange}
-        name="description"
+
+         name="description"
         placeholder="Todo Description..."
       />
-      <AddTodoButton onClick={addNewTodo} type="submit">
-        Create
-      </AddTodoButton>
+      <CustomButton onClick={addNewTodo} buttonText="Create" />
     </InputContainer>
   );
 };
