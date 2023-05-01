@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CustomButton from "../shared-components/button.component";
+import StyledInput from "../shared-components/input.component";
 
 const UserContainer = styled.div `
     color: white;
@@ -11,12 +12,15 @@ const UserContainer = styled.div `
     input {
         border: none;
         border-radius: 5px;
+        align-self: center;
         margin: 1rem;
         text-align: center;
-        height: 30px;
+        height: 40px;
+        width: 180px;
     }
     button {
         font-size: 15px;
+        height: 40px;
         align-self: center;
     }
 `;
@@ -25,7 +29,7 @@ const User = () => {
     return (
         <UserContainer>
             <h3>Retrieve User Todos:</h3>
-            <input type='text' placeholder='Enter Username...' />
+            <StyledInput onChange={() => {}} type='text' placeholder='Enter Username...' name='' />
             <CustomButton buttonText="Retrieve Todo" />
          </UserContainer>
     );

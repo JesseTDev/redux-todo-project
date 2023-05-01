@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { addTodo } from "../../../Store/Todo/Todo.action";
 import CustomButton from "../../shared-components/button.component";
+import StyledInput from "../../shared-components/input.component";
 
 
 export type Todo = {
@@ -17,16 +18,6 @@ const InputContainer = styled.div`
   flex-direction: column;
 `;
 
-const TodoInput = styled.input`
-  width: 500px;
-  border-radius: 5px;
-  border: none;
-  text-align: center;
-  align-self: center;
-  border: 2px solid #4ad1c4;
-  height: 50px;
-`;
-
 const TodoDescription = styled.textarea`
   width: 500px;
   margin-top: 1rem;
@@ -38,7 +29,7 @@ const TodoDescription = styled.textarea`
   }
 `;
 
-const TextError = styled.p `
+const TextError = styled.p`
   text-align: center;
   color: red;
   padding: 5px;
@@ -60,19 +51,19 @@ const Input = () => {
 
   const addNewTodo = () => {
 
-      const doesTitleExistCheck = currentState.filter((todo: Todo) => todo.title === toDo.title)
+    const doesTitleExistCheck = currentState.filter((todo: Todo) => todo.title === toDo.title)
 
 
-      if (doesTitleExistCheck.length > 0) {
-        setErrorState(true); 
-        setTimeout(() => {
-          setErrorState(false)
-        }, 3000); 
+    if (doesTitleExistCheck.length > 0) {
+      setErrorState(true);
+      setTimeout(() => {
+        setErrorState(false)
+      }, 3000);
 
-        return 
-      }
+      return
+    }
     dispatch(addTodo(currentState, toDo));
-}; 
+  };
 
 
   const handleChange = (
@@ -82,15 +73,10 @@ const Input = () => {
     setTodo({ ...toDo, [name]: value, dateCreated: new Date() });
   };
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log(toDo);
-  };
-
   console.log('state', currentState)
   return (
     <InputContainer>
-      <TodoInput
+      <StyledInput
         onChange={handleChange}
         name="title"
         type="text"
@@ -99,8 +85,7 @@ const Input = () => {
       {errorState && <TextError>Title Already Exists! Please try another.</TextError>}
       <TodoDescription
         onChange={handleChange}
-
-         name="description"
+        name="description"
         placeholder="Todo Description..."
       />
       <CustomButton onClick={addNewTodo} buttonText="Create" />
