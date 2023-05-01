@@ -44,14 +44,16 @@ const defaultTodoValue: Todo = {
 const Input = () => {
   const dispatch = useDispatch();
 
-  const [toDo, setTodo] = useState<Todo>(defaultTodoValue);
+  const [todo, setTodo] = useState<Todo>(defaultTodoValue);
   const [errorState, setErrorState] = useState<boolean>(false);
+  const [inputTitleError, setInputTitleError] = useState<boolean>(false); 
+  const [inputDescError, setInputDescError] = useState<boolean>(false);
 
   const currentState = useSelector((state: any) => state.todos.currentTodos);
 
   const addNewTodo = () => {
 
-    const doesTitleExistCheck = currentState.filter((todo: Todo) => todo.title === toDo.title)
+    const doesTitleExistCheck = currentState.filter((todo: Todo) => todo.title === todo.title)
 
 
     if (doesTitleExistCheck.length > 0) {
@@ -62,7 +64,7 @@ const Input = () => {
 
       return
     }
-    dispatch(addTodo(currentState, toDo));
+    dispatch(addTodo(currentState, todo));
   };
 
 
@@ -70,7 +72,17 @@ const Input = () => {
     e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     const { name, value } = e.target;
-    setTodo({ ...toDo, [name]: value, dateCreated: new Date() });
+    setTodo({ ...todo, [name]: value, dateCreated: new Date() });
+    if (name === 'description' && value.length >= 300) {
+      setInputDescError(true); 
+    } else {
+      setInputDescError(false); 
+    }
+    if (name === 'title' && value.length >= 30) {
+      setInputTitleError(true); 
+    } else {
+      setInputTitleError(false); 
+    }
   };
 
   console.log('state', currentState)
@@ -82,12 +94,14 @@ const Input = () => {
         type="text"
         placeholder="Todo Title..."
       />
+      {inputTitleError && <TextError>Maximum character limit (30) reached for Todo Title!</TextError>}
       {errorState && <TextError>Title Already Exists! Please try another.</TextError>}
       <TodoDescription
         onChange={handleChange}
         name="description"
         placeholder="Todo Description..."
       />
+      {inputDescError && <TextError>Maximum character limit (300) reached for Todo description!</TextError>}
       <CustomButton onClick={addNewTodo} buttonText="Create" />
     </InputContainer>
   );

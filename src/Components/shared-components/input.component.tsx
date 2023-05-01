@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 type StyledInputProps = {
     onChange: (e: ChangeEvent<HTMLInputElement>) => void; 
-    name: string; 
+    name?: string; 
     type: string; 
     placeholder: string; 
 }; 
