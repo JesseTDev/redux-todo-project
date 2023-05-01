@@ -7,6 +7,7 @@ import styled from "styled-components";
 import TodoFilter from "./Components/Todos/components/todo-filter.component";
 import User from "./Components/User/user.component";
 import RenderedTodos from "./Components/Todos/components/rendered-todos.component";
+import TodoUregency from "./Components/Todos/todo-urgency.component";
 
 const AppContainer = styled.div``;
 
@@ -25,6 +26,7 @@ const App = () => {
       <User />
       <Input />
       <TodoFilter />
+      <TodoUregency />
       <RenderedTodos />
     </AppContainer>
   );

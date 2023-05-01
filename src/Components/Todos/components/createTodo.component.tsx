@@ -85,7 +85,6 @@ const Input = () => {
     }
   };
 
-  console.log('state', currentState)
   return (
     <InputContainer>
       <StyledInput
