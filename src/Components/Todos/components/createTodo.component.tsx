@@ -7,6 +7,7 @@ import StyledInput from "../../shared-components/input.component";
 import Select from "../select.component";
 import { addDefaultTodos } from "../../../Store/Todo/Todo.action";
 import { DEFAULT_TODOS } from "../../../Store/Todo/Todo.Types";
+import Title from "../../shared-components/title.component";
 
 export type Todo = {
   title: string;
@@ -111,6 +112,7 @@ const Input = () => {
 
   return (
     <InputContainer>
+     <Title title='Create Todo' />
       <StyledInput
         onChange={handleChange}
         name="title"

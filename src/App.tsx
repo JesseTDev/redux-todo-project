@@ -8,13 +8,16 @@ import User from "./Components/User/user.component";
 import RenderedTodos from "./Components/Todos/components/rendered-todos.component";
 
 
-const AppContainer = styled.div``;
+const AppContainer = styled.div`
+h1 {
+  text-decoration: underline;
+}
+`;
 
 const App = () => {
   return (
     <AppContainer>
       <Title title="Redux Todo App" />
-      <Title title='Create Todo' />
       <User />
       <Input />
       <RenderedTodos />
