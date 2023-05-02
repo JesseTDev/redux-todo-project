@@ -4,13 +4,18 @@ import styled from "styled-components";
 import { addTodo } from "../../../Store/Todo/Todo.action";
 import CustomButton from "../../shared-components/button.component";
 import StyledInput from "../../shared-components/input.component";
-
+import Select from "../select.component";
+import { addDefaultTodos } from "../../../Store/Todo/Todo.action";
+import { DEFAULT_TODOS } from "../../../Store/Todo/Todo.Types";
 
 export type Todo = {
   title: string;
   description: string;
   dateCreated?: Date;
+  urgency: string; 
 };
+
+export const URGENCY_OPTIONS = [{name: 'Low'}, {name: 'Medium'}, {name: 'High'}]; 
 
 const InputContainer = styled.div`
   display: flex;
@@ -39,12 +44,14 @@ const TextError = styled.p`
 const defaultTodoValue: Todo = {
   title: "",
   description: "",
+  urgency: ""
 };
 
 const Input = () => {
   const dispatch = useDispatch();
 
   const [todo, setTodo] = useState<Todo>(defaultTodoValue);
+  const [isError, setIsError] = useState(false); 
   const [errorState, setErrorState] = useState<boolean>(false);
   const [inputTitleError, setInputTitleError] = useState<boolean>(false); 
   const [inputDescError, setInputDescError] = useState<boolean>(false);
@@ -52,20 +59,26 @@ const Input = () => {
   const currentState = useSelector((state: any) => state.todos.currentTodos);
 
   const addNewTodo = () => {
+    let doesTitleExistCheck = currentState.includes((newTodo: Todo) => newTodo.title === todo.title)
 
-    const doesTitleExistCheck = currentState.filter((todo: Todo) => todo.title === todo.title)
+    setIsError(!!doesTitleExistCheck)
 
 
-    if (doesTitleExistCheck.length > 0) {
+      if(isError) {
       setErrorState(true);
+      setIsError(false); 
       setTimeout(() => {
-        setErrorState(false)
+        setErrorState(false);
       }, 3000);
 
       return
     }
     dispatch(addTodo(currentState, todo));
   };
+
+  const addNewDefaultTodos = () => dispatch(addDefaultTodos(currentState, DEFAULT_TODOS)); 
+
+
 
 
   const handleChange = (
@@ -85,6 +98,8 @@ const Input = () => {
     }
   };
 
+
+
   return (
     <InputContainer>
       <StyledInput
@@ -101,7 +116,9 @@ const Input = () => {
         placeholder="Todo Description..."
       />
       {inputDescError && <TextError>Maximum character limit (300) reached for Todo description!</TextError>}
+      <Select onChange={handleChange} name="urgency" options={URGENCY_OPTIONS} label="Urgency" />
       <CustomButton onClick={addNewTodo} buttonText="Create" />
+      <CustomButton onClick={addNewDefaultTodos} buttonText='Add Default Todos' /> 
     </InputContainer>
   );
 };

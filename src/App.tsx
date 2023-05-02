@@ -4,29 +4,24 @@ import React from "react";
 import Title from "./Components/shared-components/title.component";
 import Input from "./Components/Todos/components/createTodo.component";
 import styled from "styled-components";
-import TodoFilter from "./Components/Todos/components/todo-filter.component";
 import User from "./Components/User/user.component";
 import RenderedTodos from "./Components/Todos/components/rendered-todos.component";
-import TodoUregency from "./Components/Todos/todo-urgency.component";
+
 
 const AppContainer = styled.div``;
 
-// Make input component reuseable (done)
+// Make Create and Add Default buttons on same line 
+// Create Divider Line 
+// Make the search Todos the same typography as main title 
+// Rename main title Create Todo
 
-// Implement a max character amount (30 for title, 300 desc) + show error when they go above  (done)
 
-// Create UI component which allows the user to select the urgency of a todo, three options (low, medium, high)
-// Add urgency property to the ToDo type (will be type string)
-
-// Rendered todos render the urgency via a chip component, change colour using styled components  
 const App = () => {
   return (
     <AppContainer>
       <Title />
       <User />
       <Input />
-      <TodoFilter />
-      <TodoUregency />
       <RenderedTodos />
     </AppContainer>
   );

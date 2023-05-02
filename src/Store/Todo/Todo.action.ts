@@ -11,15 +11,23 @@ const removeTodo = (todos: Array<Todo>, todoToRemove: Todo) => {
   return filteredTodos
 }; 
 
-
-
+const updateListofTodos = (todos: Array<Todo>, defaultTodos: Array<Todo>) => {
+  return [...todos, ...defaultTodos]
+}; 
+ 
 export const addTodo = (todos: Array<Todo>, todoToAdd: Todo) => {
   const newTodos = addNewTodo(todos, todoToAdd);
   return createAction(TODO_ACTION_TYPES.SET_TODOS, newTodos);
 };
 
 
+export const addDefaultTodos = (todos: Array<Todo>, defaultTodos: Array<Todo>) => {
+  const newTodos = updateListofTodos(todos, defaultTodos); 
+  return createAction(TODO_ACTION_TYPES.SET_TODOS, newTodos); 
+};
+
 export const removeTodoFromList = (todos: Array<Todo>, todoToAdd: Todo) => {
   const newTodos = removeTodo(todos, todoToAdd);
   return createAction(TODO_ACTION_TYPES.SET_TODOS, newTodos);
 };
+
