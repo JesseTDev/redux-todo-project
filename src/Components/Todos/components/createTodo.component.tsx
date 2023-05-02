@@ -66,7 +66,7 @@ const Input = () => {
   const dispatch = useDispatch();
 
   const [todo, setTodo] = useState<Todo>(defaultTodoValue);
-  const [isError, setIsError] = useState(false); 
+  const [isError, setIsError] = useState<boolean>(false); 
   const [errorState, setErrorState] = useState<boolean>(false);
   const [inputTitleError, setInputTitleError] = useState<boolean>(false); 
   const [inputDescError, setInputDescError] = useState<boolean>(false);
@@ -112,6 +112,7 @@ const Input = () => {
 
   return (
     <InputContainer>
+    {/* <hr />  */}
      <Title title='Create Todo' />
       <StyledInput
         onChange={handleChange}

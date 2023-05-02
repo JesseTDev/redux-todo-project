@@ -42,7 +42,7 @@ const randomDate = () => {
       urgency: 'Low'
     },
     {
-      title: "Conintue Programming",
+      title: "Continue Programming",
       description:
         "Continue programming your application. Push latest updates to a new branch in Github and create a pull request",
       dateCreated: randomDate(),
