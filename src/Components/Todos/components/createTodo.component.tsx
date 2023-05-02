@@ -21,6 +21,11 @@ const InputContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  hr {
+    width: 50%;
+    align-self: center;
+    margin: 3rem;
+  }
 `;
 
 const TodoDescription = styled.textarea`
@@ -34,11 +39,20 @@ const TodoDescription = styled.textarea`
   }
 `;
 
+const ButtonContainer = styled.div `
+  display: flex;
+  justify-content: center;
+  button{
+    width: 170px;
+    font-size: 16px;
+  }
+`;
+
 const TextError = styled.p`
   text-align: center;
   color: red;
   padding: 5px;
-`
+`; 
 
 
 const defaultTodoValue: Todo = {
@@ -61,7 +75,7 @@ const Input = () => {
   const addNewTodo = () => {
     let doesTitleExistCheck = currentState.includes((newTodo: Todo) => newTodo.title === todo.title)
 
-    setIsError(!!doesTitleExistCheck)
+    setIsError(!!doesTitleExistCheck); 
 
 
       if(isError) {
@@ -77,9 +91,6 @@ const Input = () => {
   };
 
   const addNewDefaultTodos = () => dispatch(addDefaultTodos(currentState, DEFAULT_TODOS)); 
-
-
-
 
   const handleChange = (
     e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -98,8 +109,6 @@ const Input = () => {
     }
   };
 
-
-
   return (
     <InputContainer>
       <StyledInput
@@ -117,8 +126,11 @@ const Input = () => {
       />
       {inputDescError && <TextError>Maximum character limit (300) reached for Todo description!</TextError>}
       <Select onChange={handleChange} name="urgency" options={URGENCY_OPTIONS} label="Urgency" />
+      <ButtonContainer>
       <CustomButton onClick={addNewTodo} buttonText="Create" />
       <CustomButton onClick={addNewDefaultTodos} buttonText='Add Default Todos' /> 
+      </ButtonContainer>
+      <hr /> 
     </InputContainer>
   );
 };

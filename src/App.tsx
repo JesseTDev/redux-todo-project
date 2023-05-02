@@ -10,16 +10,11 @@ import RenderedTodos from "./Components/Todos/components/rendered-todos.componen
 
 const AppContainer = styled.div``;
 
-// Make Create and Add Default buttons on same line 
-// Create Divider Line 
-// Make the search Todos the same typography as main title 
-// Rename main title Create Todo
-
-
 const App = () => {
   return (
     <AppContainer>
-      <Title />
+      <Title title="Redux Todo App" />
+      <Title title='Create Todo' />
       <User />
       <Input />
       <RenderedTodos />

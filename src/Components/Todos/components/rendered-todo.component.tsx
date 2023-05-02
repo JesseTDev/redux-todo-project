@@ -7,6 +7,7 @@ import { removeTodoFromList } from "../../../Store/Todo/Todo.action";
 import { useDispatch, useSelector } from "react-redux";
 import { Chip } from "@mui/material";
 
+
 type RenderedTodoProps = {
     todo: Todo; 
 }
@@ -30,12 +31,25 @@ const InnerContainer = styled.div `
     h3 {
         text-decoration: underline;
     }
+    button {
+        background-color: #e23c3c;
+        color: white;
+        width: 150px;
+        &:hover {
+            background-color: #d66363;
+        }
+    }
 `; 
 
 const UrgencyContainer = styled.div `
     width: 30%;
     align-self: center;
+    display: flex;
+    align-items: center;
     margin: 24px;
+    h4 {
+        margin: 8px;
+    }
 `;
 
 
@@ -46,8 +60,6 @@ const RenderedTodo = (props: RenderedTodoProps) => {
     const currentState = useSelector((state: any) => state.todos.currentTodos);
     const removeTodo = () => dispatch(removeTodoFromList(currentState, props.todo));
 
-   
-
     return (
       <RenderedTodoContainer>
             <InnerContainer>
@@ -55,6 +67,7 @@ const RenderedTodo = (props: RenderedTodoProps) => {
         <p>{dayjs(dateCreated).format('DD/MM/YYYY')}</p>
         <p>{description}</p>
         <UrgencyContainer>
+        <h4>Urgency: </h4>
         <Chip color={urgency === 'High' ? 'error' : urgency === 'Medium' ? 'warning' : 'info'} label={urgency} /> 
         </UrgencyContainer>
        <CustomButton onClick={removeTodo} buttonText="Delete Todo" />

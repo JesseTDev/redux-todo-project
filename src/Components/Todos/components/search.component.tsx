@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from "react";
 import styled from "styled-components";
 import StyledInput from "../../shared-components/input.component";
+import Title from "../../shared-components/title.component";
 
 type SearchProps = {
     label: string;
@@ -14,6 +15,9 @@ justify-content: center;
 flex-direction: column;
 align-items: center;
 color: white;
+h2 {
+    font-size: 35px;
+}
 `; 
 
 const Search = (props: SearchProps) => {
@@ -21,11 +25,10 @@ const Search = (props: SearchProps) => {
 
     return (
         <TodoFilterContainer>
-            <h3>{label}</h3>
+            <Title title="Search Todo's" />
             <StyledInput onChange={onChange} type='search' placeholder={label} /> 
-
         </TodoFilterContainer>
-    )
+    ); 
 };
 
 export default Search; 

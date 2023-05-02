@@ -14,39 +14,39 @@ const randomDate = () => {
   
   export const DEFAULT_TODOS: Array<Todo> = [
     {
-      title: "Brush Teeth",
+      title: "Clean Bedroom",
       description:
-        "You need to brush your teeth in a circular motion, using a toothbrush and toothpaste",
+        "Make sure to clean your bedroom",
       dateCreated: randomDate(),
       urgency: 'Low'
     },
     {
-      title: "Make Bed",
+      title: "Dinner with friend",
       description:
-        "You need to brush your teeth in a circular motion, using a toothbrush and toothpaste",
+        "Go to dinner with friend at 6:00pm",
       dateCreated: randomDate(),
       urgency: 'Medium'
     },
     {
-      title: "Shower",
+      title: "Book Dentist Appointment",
       description:
-        "You need to brush your teeth in a circular motion, using a toothbrush and toothpaste",
+        "Book checkup appointment at the dentist.",
       dateCreated: randomDate(),
       urgency: 'High'
     },
     {
-      title: "Cook Breakfast",
+      title: "Write a new song",
       description:
-        "You need to brush your teeth in a circular motion, using a toothbrush and toothpaste",
-      dateCreated: randomDate(),
-      urgency: 'Medium'
-    },
-    {
-      title: "Drive To Work",
-      description:
-        "You need to brush your teeth in a circular motion, using a toothbrush and toothpaste",
+        "Write a new song for new album",
       dateCreated: randomDate(),
       urgency: 'Low'
+    },
+    {
+      title: "Conintue Programming",
+      description:
+        "Continue programming your application. Push latest updates to a new branch in Github and create a pull request",
+      dateCreated: randomDate(),
+      urgency: 'High'
     },
   ];
   

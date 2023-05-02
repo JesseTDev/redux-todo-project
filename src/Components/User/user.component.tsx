@@ -20,7 +20,9 @@ const UserContainer = styled.div `
     }
     button {
         font-size: 15px;
-        height: 40px;
+        height: 43px;
+        width: 150px;
+        margin: 5px;
         align-self: center;
     }
 `;
