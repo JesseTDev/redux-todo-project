@@ -1,7 +1,9 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import CustomButton from "../shared-components/button.component";
 import StyledInput from "../shared-components/input.component";
+import { addUsername } from "../../Store/User/User.action";
 
 const UserContainer = styled.div `
     color: white;
@@ -28,11 +30,21 @@ const UserContainer = styled.div `
 `;
 
 const User = () => {
+    const dispatch = useDispatch(); 
+
+    const [username, setUsername] = useState(''); 
+
+    const usernameUpdate = () => dispatch(addUsername(username));
+
+    const updateUsername = (e: ChangeEvent<HTMLInputElement>) => {
+        setUsername(e.target.value);
+    };
+  
     return (
         <UserContainer>
             <h3>Retrieve User Todos:</h3>
-            <StyledInput onChange={() => {}} type='text' placeholder='Enter Username...' name='' />
-            <CustomButton buttonText="Retrieve Todo" />
+            <StyledInput onChange={updateUsername} type='text' placeholder='Enter Username...' name='' />
+            <CustomButton onClick={usernameUpdate} buttonText="Update Username" />
          </UserContainer>
     );
 };

@@ -1,0 +1,4 @@
+export const USER_ACTION_TYPES = {
+    SET_USERNAME: 'SET_USERNAME'
+}; 
+

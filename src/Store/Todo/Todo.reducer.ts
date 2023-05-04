@@ -1,19 +1,10 @@
-import { Todo } from "../../Components/Todos/components/createTodo.component";
+import { Action, InitialState } from "../Store";
 import { TODO_ACTION_TYPES } from "./Todo.Types";
 
-export type InitialState = {
-    currentTodos: Array<Todo>
-}; 
-
 export const toDoInitialState: InitialState = {
-    currentTodos: []
+    currentTodos: [],
+    name: ''
 }; 
-
-export type Action = {
-    type: string;
-    payload?: any; 
-}; 
-
 
 export const toDoReducer = (initialState = toDoInitialState, action: Action) => {
     const { type, payload } = action; 

@@ -12,11 +12,11 @@ import Title from "../../shared-components/title.component";
 export type Todo = {
   title: string;
   description: string;
-  dateCreated?: Date;
-  urgency: string; 
+  dateCreated: Date;
+  urgency: string;
 };
 
-export const URGENCY_OPTIONS = [{name: 'Low'}, {name: 'Medium'}, {name: 'High'}]; 
+export const URGENCY_OPTIONS = [{ name: 'Low' }, { name: 'Medium' }, { name: 'High' }];
 
 const InputContainer = styled.div`
   display: flex;
@@ -40,7 +40,7 @@ const TodoDescription = styled.textarea`
   }
 `;
 
-const ButtonContainer = styled.div `
+const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   button{
@@ -53,67 +53,70 @@ const TextError = styled.p`
   text-align: center;
   color: red;
   padding: 5px;
-`; 
+`;
 
 
 const defaultTodoValue: Todo = {
   title: "",
   description: "",
-  urgency: ""
+  urgency: "",
+  dateCreated: new Date()
 };
 
 const Input = () => {
   const dispatch = useDispatch();
 
   const [todo, setTodo] = useState<Todo>(defaultTodoValue);
-  const [isError, setIsError] = useState<boolean>(false); 
+  const [isError, setIsError] = useState<boolean>(false);
   const [errorState, setErrorState] = useState<boolean>(false);
-  const [inputTitleError, setInputTitleError] = useState<boolean>(false); 
+  const [inputTitleError, setInputTitleError] = useState<boolean>(false);
   const [inputDescError, setInputDescError] = useState<boolean>(false);
 
-  const currentState = useSelector((state: any) => state.todos.currentTodos);
+  const currentTodos = useSelector((state: any) => state.todos.currentTodos);
+
 
   const addNewTodo = () => {
-    let doesTitleExistCheck = currentState.includes((newTodo: Todo) => newTodo.title === todo.title)
+    let doesTitleExistCheck = currentTodos.includes((newTodo: Todo) => newTodo.title === todo.title)
 
-    setIsError(!!doesTitleExistCheck); 
+    setIsError(!!doesTitleExistCheck);
 
 
-      if(isError) {
+    if (isError) {
       setErrorState(true);
-      setIsError(false); 
+      setIsError(false);
       setTimeout(() => {
         setErrorState(false);
       }, 3000);
 
       return
     }
-    dispatch(addTodo(currentState, todo));
+    dispatch(addTodo(currentTodos, todo));
   };
 
-  const addNewDefaultTodos = () => dispatch(addDefaultTodos(currentState, DEFAULT_TODOS)); 
-
+  const addNewDefaultTodos = () => dispatch(addDefaultTodos(currentTodos, DEFAULT_TODOS));
+  
   const handleChange = (
     e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     const { name, value } = e.target;
     setTodo({ ...todo, [name]: value, dateCreated: new Date() });
     if (name === 'description' && value.length >= 300) {
-      setInputDescError(true); 
+      setInputDescError(true);
     } else {
-      setInputDescError(false); 
+      setInputDescError(false);
     }
     if (name === 'title' && value.length >= 30) {
-      setInputTitleError(true); 
+      setInputTitleError(true);
     } else {
-      setInputTitleError(false); 
+      setInputTitleError(false);
     }
   };
 
+  console.log(currentTodos)
+
   return (
     <InputContainer>
-    {/* <hr />  */}
-     <Title title='Create Todo' />
+      <Title title='Create Todo' />
       <StyledInput
         onChange={handleChange}
         name="title"
@@ -128,12 +131,12 @@ const Input = () => {
         placeholder="Todo Description..."
       />
       {inputDescError && <TextError>Maximum character limit (300) reached for Todo description!</TextError>}
-      <Select onChange={handleChange} name="urgency" options={URGENCY_OPTIONS} label="Urgency" />
+      <Select value={todo.urgency} onChange={handleChange} name="urgency" options={URGENCY_OPTIONS} label="Urgency" />
       <ButtonContainer>
-      <CustomButton onClick={addNewTodo} buttonText="Create" />
-      <CustomButton onClick={addNewDefaultTodos} buttonText='Add Default Todos' /> 
+        <CustomButton onClick={addNewTodo} buttonText="Create" />
+        {currentTodos.length < 5 && <CustomButton onClick={addNewDefaultTodos} buttonText='Add Default Todos' />}
       </ButtonContainer>
-      <hr /> 
+      <hr />
     </InputContainer>
   );
 };

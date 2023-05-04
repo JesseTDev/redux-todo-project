@@ -1,5 +1,6 @@
 import { createSelector } from "reselect";
-import { InitialState } from "./Todo.reducer";
+import { InitialState } from "../Store";
+
 
 export const selectTodoReducer = (state: InitialState) => state.currentTodos;
 

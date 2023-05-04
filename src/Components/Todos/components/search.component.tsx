@@ -1,7 +1,9 @@
 import React, { ChangeEvent } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import StyledInput from "../../shared-components/input.component";
 import Title from "../../shared-components/title.component";
+
 
 type SearchProps = {
     label: string;
@@ -23,9 +25,12 @@ h2 {
 const Search = (props: SearchProps) => {
     const {label, onChange} = props; 
 
+
+const currentUsername = useSelector((state: any) => state.user.name);
+
     return (
         <TodoFilterContainer>
-            <Title title="Search Todo's" />
+            <Title title={currentUsername ? `Search ${currentUsername} Todo's` : "Search Todo's" } />
             <StyledInput onChange={onChange} type='search' placeholder={label} /> 
         </TodoFilterContainer>
     ); 

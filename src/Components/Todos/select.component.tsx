@@ -13,6 +13,7 @@ type SelectProps = {
   options: Array <SelectOption>; 
   name?: string; 
   onChange: (e: ChangeEvent<HTMLInputElement>) => void; 
+  value: string | null; 
 }; 
 
 const Container = styled.div `
@@ -26,7 +27,7 @@ const InnerContainer = styled.div `
 `; 
 
 const Select = (props: SelectProps) => {
-  const {label, options, name, onChange} = props; 
+  const {label, options, name, onChange, value} = props; 
     return (
         <Container>
             <InnerContainer>
@@ -37,10 +38,9 @@ const Select = (props: SelectProps) => {
           name={name}
           fullWidth
           id="demo-simple-select-helper"
-        //   value={age}
+          value={value}
           variant="outlined"
           label={label}
-        //   onChange={handleChange}
         >
           {options.map((option: SelectOption) =>  <MenuItem value={option.name} key={option.name}>{option.name}</MenuItem>)}
         </TextField>
