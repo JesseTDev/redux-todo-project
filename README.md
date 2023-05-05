@@ -1,9 +1,6 @@
 <h3>Project Overview:</h3>
 
-Simple todo application, where the user can add default todo's, custom todo's aswell as use a variety of filters (date, title text, urgency) to search through the current list of todos.
-....
-...
-... (update)
+This is a simple todo application that allows the users to effectively manage their tasks. The application provides a range of features to enhance productivity and organisation. The users can add default todo's to get an overview of the applications functionality and can create their own todos that includes a title, description and urgency. The users can utilise various filters to retrieve specific tasks using filter by date, title text, and the urgency of the todo. Additionally, the users can personalise their experience by creating their own username and can also remove their todos from the application.
 
 <h3>Tech Stack</h3>
 
