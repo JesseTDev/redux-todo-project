@@ -12,7 +12,7 @@ This is a simple todo application that allows the users to effectively manage th
 
 <h3>Notes</h3>
 
-- React was chosen because I aim to become a junior react developer and for its capablities and ui development.
+- React was chosen because I aim to become a junior react developer and for its capabilities and ui development.
 - First time using typescript. Utilised custom types and default ts compiler.
 - For the CSS, it is a mixture of styled-components and MUI. It was outside the scope of this project to configure CRA / styled-components / MUI to work together.
 - Created some custom components and some from MUI to get used to both approaches to ui development.
