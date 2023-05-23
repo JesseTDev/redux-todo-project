@@ -17,9 +17,6 @@ This is a simple todo application that allows the users to effectively manage th
 - For the CSS, it is a mixture of styled-components and MUI. It was outside the scope of this project to configure CRA / styled-components / MUI to work together.
 - Created some custom components and some from MUI to get used to both approaches to ui development.
 
-<h3>Netlify Deployment</h3>
-<p>https://tubular-lebkuchen-db3f58.netlify.app/</p>
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
