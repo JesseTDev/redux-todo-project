@@ -1,7 +1,6 @@
-<h3>Project Overview:</h3>
-
 ![Screenshot 2023-06-09 at 10 26 52 pm](https://github.com/JesseTDev/redux-todo-project/assets/121024534/fad592e4-7072-41b0-b873-083e40b4d2c4)
 
+<h3>Project Overview:</h3>
 
 This is a simple todo application that allows the users to effectively manage their tasks. The application provides a range of features to enhance productivity and organisation. The users can add default todo's to get an overview of the applications functionality and can create their own todos that includes a title, description and urgency. The users can utilise various filters to retrieve specific tasks using filter by date, title text, and the urgency of the todo. Additionally, the users can personalise their experience by creating their own username and can also remove their todos from the application.
 
